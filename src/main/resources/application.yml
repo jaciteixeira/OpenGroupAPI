@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: OpenGroup
+  profiles:
+    active: homologacao
+  thymeleaf:
+    check-template-location: false
+
+
+server:
+  port: 80
+
+openai:
+  api:
+    key: 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
