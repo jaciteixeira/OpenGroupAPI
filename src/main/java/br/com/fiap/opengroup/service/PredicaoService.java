@@ -12,8 +12,8 @@ import java.util.List;
 @Service
 public class PredicaoService {
 
-//    @Value("${openai.api.key}")
-    private String API_KEY = "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";
+    @Value("${openai.api.key}")
+    private String API_KEY;
 
 
     public RestTemplate restTemplate(){
