@@ -4,7 +4,6 @@ import br.com.fiap.opengroup.dto.ServiceDTO;
 import br.com.fiap.opengroup.dto.request.ArquivoRequest;
 import br.com.fiap.opengroup.dto.response.ArquivoResponse;
 import br.com.fiap.opengroup.entity.Arquivo;
-import br.com.fiap.opengroup.entity.Cliente;
 import br.com.fiap.opengroup.repository.ArquivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -20,17 +19,27 @@ public class ArquivoService implements ServiceDTO<Arquivo, ArquivoRequest, Arqui
     @Autowired
     private ArquivoRepository repo;
     @Autowired
-    private ClienteService clienteService;
+    private DadosClienteService dadosClienteService;
+
+    public List<Arquivo> findAllByDadosClienteId(Long dadosClienteId) {
+        return repo.findAllByDadosClienteId(dadosClienteId);
+    }
 
     @Override
     public Arquivo toEntity(ArquivoRequest r) {
         if (Objects.isNull(r)) return null;
+        var dados = dadosClienteService.findById(r.dadosClienteId());
+        if (Objects.isNull(dados)) return null;
 
         return Arquivo.builder()
                 .nome(r.nome())
-                .caminho(r.caminho())
-                .dataArquivo(LocalDate.now())
-                .dadosCliente(clienteService.findById(r.cliente()))
+                .tipo(r.tipo())
+                .tamanho(r.tamanho())
+                .palavrasChave(r.palavrasChave())
+                .link(r.link())
+                .dataUpload(LocalDate.now())
+                .resumo(r.resumo())
+                .dadosCliente(dados)
                 .build();
     }
 
@@ -40,8 +49,11 @@ public class ArquivoService implements ServiceDTO<Arquivo, ArquivoRequest, Arqui
         return ArquivoResponse.builder()
                 .id(e.getId())
                 .nome(e.getNome())
-                .caminho(e.getCaminho())
-                .cliente(clienteService.findById(e.getDadosCliente().getId()).getNome())
+                .tipo(e.getTipo())
+                .link(e.getLink())
+                .tamanho(e.getTamanho())
+                .resumo(e.getResumo())
+                .dadosCliente(dadosClienteService.findById(e.getDadosCliente().getId()).getNome())
                 .build();
     }
 
@@ -62,10 +74,6 @@ public class ArquivoService implements ServiceDTO<Arquivo, ArquivoRequest, Arqui
 
     @Override
     public Arquivo save(ArquivoRequest r) {
-        try {
-            return repo.save(toEntity(r));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return repo.save(toEntity(r));
     }
 }

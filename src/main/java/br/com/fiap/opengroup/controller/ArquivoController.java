@@ -4,8 +4,9 @@ import br.com.fiap.opengroup.dto.ControllerDTO;
 import br.com.fiap.opengroup.dto.request.ArquivoRequest;
 import br.com.fiap.opengroup.dto.response.ArquivoResponse;
 import br.com.fiap.opengroup.entity.Arquivo;
-import br.com.fiap.opengroup.entity.Cliente;
+import br.com.fiap.opengroup.entity.DadosCliente;
 import br.com.fiap.opengroup.service.ArquivoService;
+import br.com.fiap.opengroup.service.DadosClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = "/arquivo")
@@ -25,16 +27,18 @@ public class ArquivoController implements ControllerDTO<ArquivoRequest, ArquivoR
 
     @Autowired
     private ArquivoService arquivoService;
+    @Autowired
+    private DadosClienteService dadosService;
 
     @GetMapping()
     public ResponseEntity<Collection<ArquivoResponse>> findAll(
             @RequestParam(name = "nome", required = false) String nomeArquivo,
-            @RequestParam(name = "cliente", required = false) String nomeCliente
+            @RequestParam(name = "dadosCliente", required = false) String dadosCliente
     ){
         var arquivoBuilder = Arquivo.builder().nome(nomeArquivo);
 
-        if (nomeCliente != null) {
-            arquivoBuilder.dadosCliente(Cliente.builder().nome(nomeCliente).build());
+        if (dadosCliente != null) {
+            arquivoBuilder.dadosCliente(DadosCliente.builder().nome(dadosCliente).build());
         }
 
         Arquivo arquivo = arquivoBuilder.build();
@@ -63,6 +67,7 @@ public class ArquivoController implements ControllerDTO<ArquivoRequest, ArquivoR
     @PostMapping
     @Override
     public ResponseEntity<ArquivoResponse> save(@RequestBody @Valid ArquivoRequest r) {
+        if (Objects.isNull(dadosService.findById(r.dadosClienteId()))) return ResponseEntity.badRequest().build();
         Arquivo saved = arquivoService.save(r);
 
         URI uri = ServletUriComponentsBuilder
