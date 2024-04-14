@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "8408ebc2-0d9f-4c20-b200-4273e4867a5f",
+		"name": "OpenGroup",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30321921"
+	},
+	"item": [
+		{
+			"name": "dadosCliente",
+			"item": [
+				{
+					"name": "dados",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\"nome\": \"Tech Solutions\",\r\n\"segmento\": \"Tecnologia\",\r\n\"localizacao\": \"São Paulo\",\r\n\"tempoAtuacao\": 5,\r\n\"numFuncionarios\": 100,\r\n\"faturamentoAnual\": 5000000.0,\r\n\"canaisVenda\": \"Online, Físico\",\r\n\"produtosServicos\": \"Software, Consultoria\",\r\n\"tipo\": \"PME\",\r\n\"porte\": \"Médio\",\r\n\"concorrentes\": \"Empresa A, Empresa B\",\r\n\"desafios\": \"Expandir mercado internacional\",\r\n\"objetivos\": \"Aumentar market share\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/dados",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"dados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/dados",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"dados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dados id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/dados/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"dados",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dados param",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/dados?tipo=pme&nome=Tech Solutions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"dados"
+							],
+							"query": [
+								{
+									"key": "segmento",
+									"value": "varejo",
+									"disabled": true
+								},
+								{
+									"key": "tipo",
+									"value": "pme"
+								},
+								{
+									"key": "nome",
+									"value": "Tech Solutions"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "arquivo",
+			"item": [
+				{
+					"name": "arquivo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"relatorio_trimestral.pdf\",\r\n  \"tipo\": \"PDF\",\r\n  \"tamanho\": 1024,\r\n  \"palavrasChave\": \"relatório\",\r\n  \"link\": \"http://www.example.com/relatorio_trimestral.pdf\",\r\n  \"resumo\": \"Este é um resumo do relatório trimestral\",\r\n  \"dadosClienteId\":2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/arquivo",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"arquivo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "arquivo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/arquivo",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"arquivo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "arquivo param",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/arquivo?nome=Relatorio_compras",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"arquivo"
+							],
+							"query": [
+								{
+									"key": "cliente",
+									"value": "joão",
+									"disabled": true
+								},
+								{
+									"key": "nome",
+									"value": "Relatorio_compras"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "arquivo id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/arquivo/5",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"arquivo",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "insight",
+			"item": [
+				{
+					"name": "recomendacoes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/insight/recomendacoes/1",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"insight",
+								"recomendacoes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Ana Pitanga\",\r\n  \"email\": \"ana@gmail.com\",\r\n  \"dataCriacao\": \"2024-04-16\",\r\n  \"identificacao\": \"pitanga_\",\r\n  \"telefone\": \"(21) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"dadosId\":2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/usuario",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Camisa de verão\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/usuario",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Camisa de verão\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/usuario/4",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"usuario",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario param",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Camisa de verão\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/usuario?identificacao=pitanga_",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"usuario"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "ana",
+									"disabled": true
+								},
+								{
+									"key": "identificacao",
+									"value": "pitanga_"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
