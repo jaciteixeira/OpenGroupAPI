@@ -79,4 +79,10 @@ public class ArquivoController implements ControllerDTO<ArquivoRequest, ArquivoR
         return ResponseEntity.created(uri).body(arquivoService.toResponse(saved));
     }
 
+    @GetMapping(value = "/ler")
+    public ResponseEntity<Void> lerArquivos() {
+        arquivoService.lerArquivo();
+        return ResponseEntity.ok().build();
+    }
+
 }

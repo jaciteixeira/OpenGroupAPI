@@ -1,0 +1,10 @@
+Nome: Tech Solutions
+Segmento: Tecnologia
+Localização: São Paulo
+Tempo de Atuação: 5 anos
+Número de Funcionários: 100
+Faturamento Anual: R$ 5.000.000,00
+Canais de Venda: Online, Físico
+Tipo: EPP
+Porte: Médio
+Desafios: Expandir mercado internacional

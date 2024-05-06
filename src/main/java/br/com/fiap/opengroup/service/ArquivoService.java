@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -76,4 +80,17 @@ public class ArquivoService implements ServiceDTO<Arquivo, ArquivoRequest, Arqui
     public Arquivo save(ArquivoRequest r) {
         return repo.save(toEntity(r));
     }
+
+    public void lerArquivo(){
+        Path path = Paths.get("documentacao/dados_empresa_tech_solutions.txt");
+        try {
+            List<String> linhas = Files.readAllLines(path);
+            for (String linha : linhas) {
+                System.out.println(linha);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
