@@ -13,8 +13,6 @@ public record UsuarioRequest(
         @NotBlank(message = "O email é obrigatório!")
         @Email(message = "Email inválido!")
         String email,
-        @NotNull
-        LocalDate dataCriacao,
         @NotBlank
         String identificacao,
         String telefone,

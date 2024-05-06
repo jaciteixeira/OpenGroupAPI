@@ -11,11 +11,8 @@ public record DadosRequest(
         Integer numFuncionarios,
         Double faturamentoAnual,
         String canaisVenda,
-        String produtosServicos,
         String tipo,
         String porte,
-        String concorrentes,
-        String desafios,
-        String objetivos
+       String desafios
 ) {
 }

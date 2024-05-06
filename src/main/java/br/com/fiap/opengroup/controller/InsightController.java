@@ -1,7 +1,5 @@
 package br.com.fiap.opengroup.controller;
 
-import br.com.fiap.opengroup.dto.ControllerDTO;
-import br.com.fiap.opengroup.dto.request.InsightRequest;
 import br.com.fiap.opengroup.dto.response.InsightResponse;
 import br.com.fiap.opengroup.service.DadosClienteService;
 import br.com.fiap.opengroup.service.InsightService;

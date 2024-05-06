@@ -21,8 +21,12 @@ public class Insight {
     @Column(name = "ID_INSIGH")
     private Long id;
 
-    @Column(name = "DATA GERACAO")
+    @Column(name = "DATA_GERACAO")
     private LocalDate dataGeracao;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "IMPACTO")
+    private Impacto impacto;
 
     @Column(name = "DETALHES")
     private String detalhes;
@@ -30,12 +34,9 @@ public class Insight {
     @Column(name = "RECOMENDACOES")
     private String recomendacoes;
 
-    @Column(name = "IMPACTO")
-    private Double impacto;
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "DADOS_INSIGHT",
+            name = "ID_DADOS_CLIENTE",
             referencedColumnName = "ID_DADOS",
             foreignKey = @ForeignKey(
                     name = "FK_INSIGH_DADOS"

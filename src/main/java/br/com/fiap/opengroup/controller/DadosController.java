@@ -4,6 +4,7 @@ import br.com.fiap.opengroup.dto.ControllerDTO;
 import br.com.fiap.opengroup.dto.request.DadosRequest;
 import br.com.fiap.opengroup.dto.response.DadosResponse;
 import br.com.fiap.opengroup.entity.DadosCliente;
+import br.com.fiap.opengroup.entity.Tipo;
 import br.com.fiap.opengroup.service.DadosClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,18 @@ public class DadosController implements ControllerDTO<DadosRequest, DadosRespons
             @RequestParam(name = "nome", required = false) String nome
 
     ){
+        Tipo tipoEnum = null;
+        if (tipo != null) {
+            try {
+                tipoEnum = Tipo.valueOf(tipo.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
         var cliente = DadosCliente.builder()
                 .nome(nome)
                 .segmento(segmento)
-                .tipo(tipo)
+                .tipo(tipoEnum != null ? Tipo.valueOf(tipoEnum.getSigla()) : null)
                 .build();
 
         ExampleMatcher matcher = ExampleMatcher.matchingAll()

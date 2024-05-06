@@ -4,6 +4,7 @@ import br.com.fiap.opengroup.dto.ServiceDTO;
 import br.com.fiap.opengroup.dto.request.DadosRequest;
 import br.com.fiap.opengroup.dto.response.DadosResponse;
 import br.com.fiap.opengroup.entity.DadosCliente;
+import br.com.fiap.opengroup.entity.Tipo;
 import br.com.fiap.opengroup.repository.DadosClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Service
 public class DadosClienteService implements ServiceDTO<DadosCliente, DadosRequest, DadosResponse> {
@@ -29,12 +31,12 @@ public class DadosClienteService implements ServiceDTO<DadosCliente, DadosReques
                 .numFuncionarios(r.numFuncionarios())
                 .faturamentoAnual(r.faturamentoAnual())
                 .canaisVenda(r.canaisVenda())
-                .produtosServicos(r.produtosServicos())
-                .tipo(r.tipo())
+                .produtosServicos(gerarProdutoServico())
+                .tipo(Tipo.valueOf(r.tipo()))
                 .porte(r.porte())
-                .concorrentes(r.concorrentes())
+                .concorrentes(gerarConcorrente())
                 .desafios(r.desafios())
-                .objetivos(r.objetivos())
+                .objetivos(gerarObjetivo())
                 .build();
 
     }
@@ -51,7 +53,7 @@ public class DadosClienteService implements ServiceDTO<DadosCliente, DadosReques
                 .numFuncionarios(e.getNumFuncionarios())
                 .canaisVenda(e.getCanaisVenda())
                 .produtosServicos(e.getProdutosServicos())
-                .tipo(e.getTipo())
+                .tipo(String.valueOf(e.getTipo()))
                 .porte(e.getPorte())
                 .build();
     }
@@ -75,5 +77,20 @@ public class DadosClienteService implements ServiceDTO<DadosCliente, DadosReques
     @Override
     public DadosCliente save(DadosRequest r) {
         return repo.save(toEntity(r));
+    }
+
+    public String gerarObjetivo() {
+        String[] objetivos = {"Aumentar market share", "Expandir para novos mercados", "Melhorar a eficiência operacional"};
+        return objetivos[new Random().nextInt(objetivos.length)];
+    }
+
+    public String gerarConcorrente() {
+        String[] concorrentes = {"CodeWise Solutions", "InnovateTech Solutions", "DataSphere Solutions"};
+        return concorrentes[new Random().nextInt(concorrentes.length)];
+    }
+
+    public String gerarProdutoServico() {
+        String[] produtosServicos = {"Software", "Consultoria", "Desenvolvimento de aplicativos"};
+        return produtosServicos[new Random().nextInt(produtosServicos.length)];
     }
 }

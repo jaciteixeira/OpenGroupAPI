@@ -9,7 +9,3 @@ spring:
 
 server:
   port: 80
-
-openai:
-  api:
-    key: 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

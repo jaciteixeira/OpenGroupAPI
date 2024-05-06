@@ -46,7 +46,7 @@ public class DadosCliente {
     private String produtosServicos;
 
     @Column(name = "TIPO")
-    private String tipo;
+    private Tipo tipo;
 
     @Column(name = "PORTE")
     private String porte;
