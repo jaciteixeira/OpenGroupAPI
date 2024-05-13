@@ -36,13 +36,13 @@ public class Insight {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "ID_DADOS_CLIENTE",
-            referencedColumnName = "ID_DADOS",
+            name = "ID_CLIENTE",
+            referencedColumnName = "ID_CLIENTE",
             foreignKey = @ForeignKey(
-                    name = "FK_INSIGH_DADOS"
+                    name = "FK_INSIGH_CLIENTE"
             )
     )
-    private DadosCliente dados;
+    private Cliente cliente;
 
 
 

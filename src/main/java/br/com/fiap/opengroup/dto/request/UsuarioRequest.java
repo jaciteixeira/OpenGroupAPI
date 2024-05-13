@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public record UsuarioRequest(
-        @NotBlank(message = "O nome é obrigatório!")
+        @NotBlank(message = "O src é obrigatório!")
         String nome,
         @NotBlank(message = "O email é obrigatório!")
         @Email(message = "Email inválido!")

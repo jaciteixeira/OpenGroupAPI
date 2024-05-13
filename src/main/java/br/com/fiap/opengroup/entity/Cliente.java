@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "OG_TB_DADOS_CLIENTE", uniqueConstraints = {
-        @UniqueConstraint(name = "UK_NOME", columnNames = "NM_DADOS_CLIENTE")
+@Table(name = "OG_TB_CLIENTE", uniqueConstraints = {
+        @UniqueConstraint(name = "UK_NOME", columnNames = "NM_CLIENTE")
 })
-public class DadosCliente {
+public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_DADOS_CLIENTE")
-    @SequenceGenerator(name = "SQ_DADOS_CLIENTE", sequenceName = "SQ_DADOS_CLIENTE", allocationSize = 1)
-    @Column(name = "ID_DADOS")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CLIENTE")
+    @SequenceGenerator(name = "SQ_CLIENTE", sequenceName = "SQ_CLIENTE", allocationSize = 1)
+    @Column(name = "ID_CLIENTE")
     private Long id;
 
-    @Column(name = "NM_DADOS_CLIENTE")
+    @Column(name = "NM_CLIENTE")
     private String nome;
 
     @Column(name = "SEGMENTO")
@@ -46,7 +46,7 @@ public class DadosCliente {
     private String produtosServicos;
 
     @Column(name = "TIPO")
-    private Tipo tipo;
+    private TipoEmpresa tipo;
 
     @Column(name = "PORTE")
     private String porte;

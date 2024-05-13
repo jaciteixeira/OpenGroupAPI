@@ -3,7 +3,6 @@ package br.com.fiap.opengroup.service;
 import br.com.fiap.opengroup.dto.response.InsightResponse;
 import br.com.fiap.opengroup.entity.Impacto;
 import br.com.fiap.opengroup.entity.Insight;
-import br.com.fiap.opengroup.entity.Tipo;
 import br.com.fiap.opengroup.repository.InsightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,16 +22,16 @@ public class InsightService {
 
     public InsightResponse gerarInsightPorIA(Long id){
 
-        var arquivos = arquivoService.findAllByDadosClienteId(id);
-        var dadosCliente = dadosClienteService.findById(id);
+        var arquivos = arquivoService.findAllByClienteId(id);
+        var cliente = dadosClienteService.findById(id);
 
-        String nome = dadosCliente.getNome();
-        String segmento = dadosCliente.getSegmento();
-        String localizacao = dadosCliente.getLocalizacao();
-        Integer tempo = dadosCliente.getTempoAtuacao();
-        Integer numFuncionarios = dadosCliente.getNumFuncionarios();
-        String faturamento = String.format("%.2f", dadosCliente.getFaturamentoAnual());
-        String desafios = dadosCliente.getDesafios();
+        String nome = cliente.getNome();
+        String segmento = cliente.getSegmento();
+        String localizacao = cliente.getLocalizacao();
+        Integer tempo = cliente.getTempoAtuacao();
+        Integer numFuncionarios = cliente.getNumFuncionarios();
+        String faturamento = String.format("%.2f", cliente.getFaturamentoAnual());
+        String desafios = cliente.getDesafios();
 
         // Exemplo de insights criados pela IA
         var recomendacao = InsightResponse.builder()
@@ -49,7 +48,7 @@ public class InsightService {
                 .detalhes(recomendacao.detalhes())
                 .recomendacoes(recomendacao.recomendacoes())
                 .impacto(Impacto.valueOf(recomendacao.impacto().toString()))
-                .dados(dadosCliente)
+                .cliente(cliente)
                 .build());
 
         return recomendacao;

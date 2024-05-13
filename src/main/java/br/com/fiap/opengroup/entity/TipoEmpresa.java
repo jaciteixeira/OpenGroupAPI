@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Tipo {
+public enum TipoEmpresa {
     ME(1L, "Microempresa", "ME"),
     LTDA(2L, "Sociedade Limitada", "LTDA"),
     SA(3L, "Sociedade Anônima", "SA"),

@@ -1,85 +1,58 @@
 package br.com.fiap.opengroup.service;
 
-import br.com.fiap.opengroup.dto.ServiceDTO;
-import br.com.fiap.opengroup.dto.request.ArquivoRequest;
-import br.com.fiap.opengroup.dto.response.ArquivoResponse;
 import br.com.fiap.opengroup.entity.Arquivo;
 import br.com.fiap.opengroup.repository.ArquivoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Objects;
 
 @Service
-public class ArquivoService implements ServiceDTO<Arquivo, ArquivoRequest, ArquivoResponse> {
+public class ArquivoService{
+
+    private final String ARQUIVO_FOLDER = System.getProperty("user.dir") + "file_server/arquivos_empresas";
 
     @Autowired
     private ArquivoRepository repo;
     @Autowired
-    private DadosClienteService dadosClienteService;
+    private DadosClienteService clienteService;
 
-    public List<Arquivo> findAllByDadosClienteId(Long dadosClienteId) {
+    public List<Arquivo> findAllByClienteId(Long dadosClienteId) {
         return repo.findAllByDadosClienteId(dadosClienteId);
     }
 
-    @Override
-    public Arquivo toEntity(ArquivoRequest r) {
-        if (Objects.isNull(r)) return null;
-        var dados = dadosClienteService.findById(r.dadosClienteId());
-        if (Objects.isNull(dados)) return null;
-
-        return Arquivo.builder()
-                .nome(r.nome())
-                .tipo(r.tipo())
-                .tamanho(r.tamanho())
-                .palavrasChave(r.palavrasChave())
-                .link(r.link())
-                .dataUpload(LocalDate.now())
-                .resumo(r.resumo())
-                .dadosCliente(dados)
-                .build();
+    public Arquivo save(Arquivo arq, MultipartFile file){
+        Arquivo saved = null;
+        if (uploadFile(file, arq)) saved = repo.save(arq);
+        return saved;
     }
 
-    @Override
-    public ArquivoResponse toResponse(Arquivo e) {
-        if (Objects.isNull(e)) return null;
-        return ArquivoResponse.builder()
-                .id(e.getId())
-                .nome(e.getNome())
-                .tipo(e.getTipo())
-                .link(e.getLink())
-                .tamanho(e.getTamanho())
-                .resumo(e.getResumo())
-                .dadosCliente(dadosClienteService.findById(e.getDadosCliente().getId()).getNome())
-                .build();
+    private boolean uploadFile(MultipartFile file, Arquivo arq) {
+
+        if (file.isEmpty()) throw new RuntimeException( "Arquivo vazio" );
+
+        Path destination = Paths
+                .get( ARQUIVO_FOLDER )
+                .resolve( arq.getSrc() )
+                .normalize()
+                .toAbsolutePath();
+        try {
+             if (!Files.exists(Path.of( ARQUIVO_FOLDER ))) Files.createDirectories(Path.of (ARQUIVO_FOLDER));
+             Files.copy(file.getInputStream(), destination, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.err.println( "[ IOEXCEPTION ][  ARQUIVO - UPLOAD  ] -  ERRO NO UPLOAD DO ARQUIVO:  " + e.getMessage() );
+//            log.debug("[ IOEXCEPTION ][  ARQUIVO - UPLOAD  ] -  ERRO NO UPLOAD DO ARQUIVO:  " + e.getMessage());
+            return false;
+        }
+        return true;
     }
 
-    @Override
-    public List<Arquivo> findAll() {
-        return repo.findAll();
-    }
-
-    @Override
-    public List<Arquivo> findAll(Example<Arquivo> example) {
-        return repo.findAll(example);
-    }
-
-    @Override
-    public Arquivo findById(Long id) {
-        return repo.findById(id).orElse(null);
-    }
-
-    @Override
-    public Arquivo save(ArquivoRequest r) {
-        return repo.save(toEntity(r));
-    }
 
     public void lerArquivo(){
         Path path = Paths.get("documentacao/dados_empresa_tech_solutions.txt");

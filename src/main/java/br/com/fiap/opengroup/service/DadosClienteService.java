@@ -1,10 +1,10 @@
 package br.com.fiap.opengroup.service;
 
 import br.com.fiap.opengroup.dto.ServiceDTO;
-import br.com.fiap.opengroup.dto.request.DadosRequest;
-import br.com.fiap.opengroup.dto.response.DadosResponse;
-import br.com.fiap.opengroup.entity.DadosCliente;
-import br.com.fiap.opengroup.entity.Tipo;
+import br.com.fiap.opengroup.dto.request.ClienteRequest;
+import br.com.fiap.opengroup.dto.response.ClienteResponse;
+import br.com.fiap.opengroup.entity.Cliente;
+import br.com.fiap.opengroup.entity.TipoEmpresa;
 import br.com.fiap.opengroup.repository.DadosClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -15,15 +15,15 @@ import java.util.Objects;
 import java.util.Random;
 
 @Service
-public class DadosClienteService implements ServiceDTO<DadosCliente, DadosRequest, DadosResponse> {
+public class DadosClienteService implements ServiceDTO<Cliente, ClienteRequest, ClienteResponse> {
 
     @Autowired
     private DadosClienteRepository repo;
 
     @Override
-    public DadosCliente toEntity(DadosRequest r) {
+    public Cliente toEntity(ClienteRequest r) {
         if (Objects.isNull(r)) return null;
-        return DadosCliente.builder()
+        return Cliente.builder()
                 .nome(r.nome())
                 .segmento(r.segmento())
                 .localizacao(r.localizacao())
@@ -32,7 +32,7 @@ public class DadosClienteService implements ServiceDTO<DadosCliente, DadosReques
                 .faturamentoAnual(r.faturamentoAnual())
                 .canaisVenda(r.canaisVenda())
                 .produtosServicos(gerarProdutoServico())
-                .tipo(Tipo.valueOf(r.tipo()))
+                .tipo(TipoEmpresa.valueOf(r.tipo()))
                 .porte(r.porte())
                 .concorrentes(gerarConcorrente())
                 .desafios(r.desafios())
@@ -42,9 +42,9 @@ public class DadosClienteService implements ServiceDTO<DadosCliente, DadosReques
     }
 
     @Override
-    public DadosResponse toResponse(DadosCliente e) {
+    public ClienteResponse toResponse(Cliente e) {
         if (Objects.isNull(e)) return null;
-        return DadosResponse.builder()
+        return ClienteResponse.builder()
                 .id(e.getId())
                 .nome(e.getNome())
                 .segmento(e.getSegmento())
@@ -60,22 +60,22 @@ public class DadosClienteService implements ServiceDTO<DadosCliente, DadosReques
 
 
     @Override
-    public List<DadosCliente> findAll() {
+    public List<Cliente> findAll() {
         return repo.findAll();
     }
 
     @Override
-    public List<DadosCliente> findAll(Example<DadosCliente> example) {
+    public List<Cliente> findAll(Example<Cliente> example) {
         return repo.findAll(example);
     }
 
     @Override
-    public DadosCliente findById(Long id) {
+    public Cliente findById(Long id) {
         return repo.findById(id).orElse(null);
     }
 
     @Override
-    public DadosCliente save(DadosRequest r) {
+    public Cliente save(ClienteRequest r) {
         return repo.save(toEntity(r));
     }
 

@@ -24,10 +24,10 @@ public class Arquivo {
     private Long id;
 
     @Column(name = "NM_ARQUIVO")
-    private String nome;
+    private String src;
 
-    @Column(name = "TIPO_ARQUIVO")
-    private String tipo;
+    @Column(name = "EXTENCAO_ARQUIVO")
+    private String extensao;
 
     @Column(name = "TAMANHO")
     private Long tamanho;
@@ -35,8 +35,8 @@ public class Arquivo {
     @Column(name = "PALAVRA_CHAVE")
     private String palavrasChave;
 
-    @Column(name = "LINK_ARQUIVO")
-    private String link; // O caminho do arquivo
+    @Column(name = "CAMINHO_ARQUIVO")
+    private String caminho; // O caminho do arquivo
 
     @Column(name = "DT_ARQUIVO")
     private LocalDate dataUpload;
@@ -52,5 +52,5 @@ public class Arquivo {
                     name = "FK_ARQUIVO_DADOS"
             )
     )
-    private DadosCliente dadosCliente;
+    private Cliente dadosCliente;
 }

@@ -1,10 +1,10 @@
 package br.com.fiap.opengroup.controller;
 
 import br.com.fiap.opengroup.dto.ControllerDTO;
-import br.com.fiap.opengroup.dto.request.DadosRequest;
-import br.com.fiap.opengroup.dto.response.DadosResponse;
-import br.com.fiap.opengroup.entity.DadosCliente;
-import br.com.fiap.opengroup.entity.Tipo;
+import br.com.fiap.opengroup.dto.request.ClienteRequest;
+import br.com.fiap.opengroup.dto.response.ClienteResponse;
+import br.com.fiap.opengroup.entity.Cliente;
+import br.com.fiap.opengroup.entity.TipoEmpresa;
 import br.com.fiap.opengroup.service.DadosClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,46 +20,46 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/dados")
-public class DadosController implements ControllerDTO<DadosRequest, DadosResponse> {
+public class ClienteController implements ControllerDTO<ClienteRequest, ClienteResponse> {
 
     @Autowired
     private DadosClienteService service;
 
     @GetMapping
-    public ResponseEntity<Collection<DadosResponse>> findAll(
+    public ResponseEntity<Collection<ClienteResponse>> findAll(
             @RequestParam(name = "segmento", required = false) String segmento,
             @RequestParam(name = "tipo", required = false) String tipo,
             @RequestParam(name = "nome", required = false) String nome
 
     ){
-        Tipo tipoEnum = null;
+        TipoEmpresa tipoEnum = null;
         if (tipo != null) {
             try {
-                tipoEnum = Tipo.valueOf(tipo.toUpperCase());
+                tipoEnum = TipoEmpresa.valueOf(tipo.toUpperCase());
             } catch (IllegalArgumentException e) {
                 return ResponseEntity.badRequest().build();
             }
         }
-        var cliente = DadosCliente.builder()
+        var cliente = Cliente.builder()
                 .nome(nome)
                 .segmento(segmento)
-                .tipo(tipoEnum != null ? Tipo.valueOf(tipoEnum.getSigla()) : null)
+                .tipo(tipoEnum != null ? TipoEmpresa.valueOf(tipoEnum.getSigla()) : null)
                 .build();
 
         ExampleMatcher matcher = ExampleMatcher.matchingAll()
                 .withIgnoreNullValues()
                 .withIgnoreCase();
 
-        Example<DadosCliente> example = Example.of(cliente, matcher);
+        Example<Cliente> example = Example.of(cliente, matcher);
 
-        List<DadosCliente> dadosClientes = service.findAll(example);
+        List<Cliente> dadosClientes = service.findAll(example);
         return ResponseEntity.ok(dadosClientes.stream().map(service::toResponse).toList());
     }
 
     @GetMapping(value = "/{id}")
     @Override
-    public ResponseEntity<DadosResponse> findById(@PathVariable Long id) {
-        DadosResponse dados = service.toResponse(service.findById(id));
+    public ResponseEntity<ClienteResponse> findById(@PathVariable Long id) {
+        ClienteResponse dados = service.toResponse(service.findById(id));
         if (dados == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(dados);
     }
@@ -67,7 +67,7 @@ public class DadosController implements ControllerDTO<DadosRequest, DadosRespons
     @Transactional
     @PostMapping
     @Override
-    public ResponseEntity<DadosResponse> save(@RequestBody @Valid DadosRequest r) {
+    public ResponseEntity<ClienteResponse> save(@RequestBody @Valid ClienteRequest r) {
         var saved = service.save(r);
         if (saved == null) return ResponseEntity.badRequest().build();
 

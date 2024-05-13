@@ -2,8 +2,8 @@ package br.com.fiap.opengroup.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record DadosRequest(
-        @NotBlank(message = "O nome do arquivo é obrigatório!")
+public record ClienteRequest(
+        @NotBlank(message = "O src do arquivo é obrigatório!")
         String nome,
         String segmento,
         String localizacao,

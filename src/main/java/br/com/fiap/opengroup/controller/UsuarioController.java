@@ -37,7 +37,7 @@ public class UsuarioController implements ControllerDTO<UsuarioRequest, UsuarioR
         ExampleMatcher matcher = ExampleMatcher.matchingAll()
                 .withIgnoreNullValues()
                 .withIgnoreCase()
-                .withMatcher("nome", ExampleMatcher.GenericPropertyMatchers.contains());
+                .withMatcher("src", ExampleMatcher.GenericPropertyMatchers.contains());
 
         Example<Usuario> example = Example.of(item, matcher);
 
