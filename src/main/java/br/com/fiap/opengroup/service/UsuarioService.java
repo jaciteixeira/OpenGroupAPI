@@ -19,13 +19,13 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
     @Autowired
     private UsuarioRepository repo;
     @Autowired
-    private DadosClienteService dadosClienteService;
+    private ClienteService clienteService;
 
     @Override
     public Usuario toEntity(UsuarioRequest r) {
         if (Objects.isNull(r)) return null;
-        var dados = dadosClienteService.findById(r.dadosId());
-        if (Objects.isNull(dados)) return null;
+        var cliente = clienteService.findById(r.clienteId());
+        if (Objects.isNull(cliente)) return null;
         return Usuario.builder()
                 .nome(r.nome())
                 .dataCriacao(LocalDate.now())
@@ -33,7 +33,7 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
                 .telefone(r.telefone())
                 .senha(r.senha())
                 .status(r.status())
-                .dados(dados)
+                .cliente(cliente)
                 .build();
     }
 

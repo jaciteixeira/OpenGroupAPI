@@ -1,7 +1,7 @@
 package br.com.fiap.opengroup.controller;
 
 import br.com.fiap.opengroup.dto.response.InsightResponse;
-import br.com.fiap.opengroup.service.DadosClienteService;
+import br.com.fiap.opengroup.service.ClienteService;
 import br.com.fiap.opengroup.service.InsightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ public class InsightController {
     @Autowired
     private InsightService service;
     @Autowired
-    private DadosClienteService clienteService;
+    private ClienteService clienteService;
 
     @GetMapping("/recomendacoes/{id}")
     public ResponseEntity<InsightResponse> obterRecomendacoes(@PathVariable Long id) {

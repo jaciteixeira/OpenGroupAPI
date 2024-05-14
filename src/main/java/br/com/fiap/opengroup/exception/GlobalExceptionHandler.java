@@ -10,7 +10,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
-        return ResponseEntity.badRequest().body("Erro de violação de integridade de dados: " + ex.getMessage());
+        return ResponseEntity.badRequest().body("Erro de violação de integridade de cliente: " + ex.getMessage());
     }
 }
 

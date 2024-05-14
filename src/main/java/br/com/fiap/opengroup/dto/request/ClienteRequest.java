@@ -1,5 +1,6 @@
 package br.com.fiap.opengroup.dto.request;
 
+import br.com.fiap.opengroup.entity.TipoEmpresa;
 import jakarta.validation.constraints.NotBlank;
 
 public record ClienteRequest(
@@ -11,7 +12,7 @@ public record ClienteRequest(
         Integer numFuncionarios,
         Double faturamentoAnual,
         String canaisVenda,
-        String tipo,
+        TipoEmpresa tipo,
         String porte,
        String desafios
 ) {

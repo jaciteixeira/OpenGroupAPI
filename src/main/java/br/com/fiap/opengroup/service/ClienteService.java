@@ -5,7 +5,7 @@ import br.com.fiap.opengroup.dto.request.ClienteRequest;
 import br.com.fiap.opengroup.dto.response.ClienteResponse;
 import br.com.fiap.opengroup.entity.Cliente;
 import br.com.fiap.opengroup.entity.TipoEmpresa;
-import br.com.fiap.opengroup.repository.DadosClienteRepository;
+import br.com.fiap.opengroup.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,10 @@ import java.util.Objects;
 import java.util.Random;
 
 @Service
-public class DadosClienteService implements ServiceDTO<Cliente, ClienteRequest, ClienteResponse> {
+public class ClienteService implements ServiceDTO<Cliente, ClienteRequest, ClienteResponse> {
 
     @Autowired
-    private DadosClienteRepository repo;
+    private ClienteRepository repo;
 
     @Override
     public Cliente toEntity(ClienteRequest r) {

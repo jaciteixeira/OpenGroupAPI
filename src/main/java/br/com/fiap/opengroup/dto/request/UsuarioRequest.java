@@ -23,5 +23,5 @@ public record UsuarioRequest(
         @NotBlank
         String status,
         @NotNull(message = "O id cliente que o usuario se reporta é obrigatório!")
-        Long dadosId
+        Long clienteId
 ) {}

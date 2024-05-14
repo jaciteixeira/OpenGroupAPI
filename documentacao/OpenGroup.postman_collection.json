@@ -7,10 +7,10 @@
 	},
 	"item": [
 		{
-			"name": "dadosCliente",
+			"name": "cliente",
 			"item": [
 				{
-					"name": "dados",
+					"name": "cliente",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -24,46 +24,46 @@
 							}
 						},
 						"url": {
-							"raw": "localhost/dados",
+							"raw": "localhost/cliente",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"dados"
+								"cliente"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "dados",
+					"name": "cliente",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost/dados",
+							"raw": "localhost/cliente",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"dados"
+								"cliente"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "dados id",
+					"name": "cliente id",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost/dados/2",
+							"raw": "localhost/cliente/2",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"dados",
+								"cliente",
 								"2"
 							]
 						}
@@ -71,17 +71,17 @@
 					"response": []
 				},
 				{
-					"name": "dados param",
+					"name": "cliente param",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost/dados?tipo=pme&nome=Tech Solutions",
+							"raw": "localhost/cliente?tipo=pme&nome=Tech Solutions",
 							"host": [
 								"localhost"
 							],
 							"path": [
-								"dados"
+								"cliente"
 							],
 							"query": [
 								{
@@ -114,7 +114,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"relatorio_trimestral.pdf\",\r\n  \"tipo\": \"PDF\",\r\n  \"tamanho\": 1024,\r\n  \"palavrasChave\": \"relatório\",\r\n  \"link\": \"http://www.example.com/relatorio_trimestral.pdf\",\r\n  \"resumo\": \"Este é um resumo do relatório trimestral\",\r\n  \"dadosClienteId\":2\r\n}\r\n",
+							"raw": "{\r\n  \"nome\": \"relatorio_trimestral.pdf\",\r\n  \"tipo\": \"PDF\",\r\n  \"tamanho\": 1024,\r\n  \"palavrasChave\": \"relatório\",\r\n  \"link\": \"http://www.example.com/relatorio_trimestral.pdf\",\r\n  \"resumo\": \"Este é um resumo do relatório trimestral\",\r\n  \"clienteId\":2\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Ana Pitanga\",\r\n  \"email\": \"ana@gmail.com\",\r\n  \"dataCriacao\": \"2024-04-16\",\r\n  \"identificacao\": \"pitanga_\",\r\n  \"telefone\": \"(21) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"dadosId\":2\r\n}\r\n",
+							"raw": "{\r\n  \"nome\": \"Ana Pitanga\",\r\n  \"email\": \"ana@gmail.com\",\r\n  \"dataCriacao\": \"2024-04-16\",\r\n  \"identificacao\": \"pitanga_\",\r\n  \"telefone\": \"(21) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"clienteId\":2\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"

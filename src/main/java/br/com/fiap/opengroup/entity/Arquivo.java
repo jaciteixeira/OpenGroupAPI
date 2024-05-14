@@ -13,18 +13,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "OG_TB_ARQUIVO", uniqueConstraints = {
-        @UniqueConstraint(name = "UK_NOME", columnNames = "NM_ARQUIVO")
-})
+@Table(name = "OG_TB_ARQUIVO")
 public class Arquivo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_ARQUIVO")
-    @SequenceGenerator(name = "SQ_ARQUIVO", sequenceName = "SQ_ARQUIVO", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_OG_ARQUIVO")
+    @SequenceGenerator(name = "SQ_OG_ARQUIVO", sequenceName = "SQ_OG_ARQUIVO", allocationSize = 1)
     @Column(name = "ID_ARQUIVO")
     private Long id;
 
     @Column(name = "NM_ARQUIVO")
-    private String src;
+    private String nome;
+
+    @Column(name = "CAMINHO_ARQUIVO")
+    private String caminho;
 
     @Column(name = "EXTENCAO_ARQUIVO")
     private String extensao;
@@ -35,22 +36,9 @@ public class Arquivo {
     @Column(name = "PALAVRA_CHAVE")
     private String palavrasChave;
 
-    @Column(name = "CAMINHO_ARQUIVO")
-    private String caminho; // O caminho do arquivo
-
     @Column(name = "DT_ARQUIVO")
     private LocalDate dataUpload;
 
     @Column(name = "RESUMO")
     private String resumo;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(
-            name = "ID_DADOS",
-            referencedColumnName = "ID_DADOS",
-            foreignKey = @ForeignKey(
-                    name = "FK_ARQUIVO_DADOS"
-            )
-    )
-    private Cliente dadosCliente;
 }

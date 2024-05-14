@@ -48,7 +48,7 @@ public class Usuario {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "CLIENTE_USUARIO",
+            name = "CLIENTE",
             referencedColumnName = "ID_CLIENTE" ,
             foreignKey = @ForeignKey(
                     name = "FK_USUARIO_CLIENTE"

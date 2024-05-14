@@ -16,14 +16,13 @@ public class InsightService {
     @Autowired
     private InsightRepository repo;
     @Autowired
-    private DadosClienteService dadosClienteService;
+    private ClienteService clienteService;
     @Autowired
     ArquivoService arquivoService;
 
     public InsightResponse gerarInsightPorIA(Long id){
 
-        var arquivos = arquivoService.findAllByClienteId(id);
-        var cliente = dadosClienteService.findById(id);
+        var cliente = clienteService.findById(id);
 
         String nome = cliente.getNome();
         String segmento = cliente.getSegmento();
@@ -35,7 +34,7 @@ public class InsightService {
 
         // Exemplo de insights criados pela IA
         var recomendacao = InsightResponse.builder()
-                .dadosCliente(nome)
+                .cliente(nome)
                 .dataGeracao(LocalDate.now())
                 .detalhes(String.format("A empresa %s, do segmento de %s, localizada em %s, atuando há %s anos, com %s funcionários e faturamento anual de R$ %s, enfrenta o desafio de %s."
                         , nome, segmento, localizacao, tempo, numFuncionarios, faturamento, desafios))

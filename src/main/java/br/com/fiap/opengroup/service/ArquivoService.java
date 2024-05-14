@@ -21,11 +21,11 @@ public class ArquivoService{
     @Autowired
     private ArquivoRepository repo;
     @Autowired
-    private DadosClienteService clienteService;
+    private ClienteService clienteService;
 
-    public List<Arquivo> findAllByClienteId(Long dadosClienteId) {
-        return repo.findAllByDadosClienteId(dadosClienteId);
-    }
+//    public List<Arquivo> findAllByClienteId(LonclienteteId) {
+//        return repo.findAllByClienteId(dadcliente;
+//    }
 
     public Arquivo save(Arquivo arq, MultipartFile file){
         Arquivo saved = null;
@@ -33,13 +33,13 @@ public class ArquivoService{
         return saved;
     }
 
-    private boolean uploadFile(MultipartFile file, Arquivo arq) {
+    public boolean uploadFile(MultipartFile file, Arquivo arq) {
 
         if (file.isEmpty()) throw new RuntimeException( "Arquivo vazio" );
 
         Path destination = Paths
                 .get( ARQUIVO_FOLDER )
-                .resolve( arq.getSrc() )
+                .resolve( arq.getCaminho() )
                 .normalize()
                 .toAbsolutePath();
         try {
@@ -55,7 +55,7 @@ public class ArquivoService{
 
 
     public void lerArquivo(){
-        Path path = Paths.get("documentacao/dados_empresa_tech_solutions.txt");
+        Path path = Paths.get("documentacao/cliente_empresa_tech_solutions.txt");
         try {
             List<String> linhas = Files.readAllLines(path);
             for (String linha : linhas) {

@@ -16,8 +16,8 @@ import java.time.LocalDate;
 @Table(name = "OG_TB_INSIGHT")
 public class Insight {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_INSIGH")
-    @SequenceGenerator(name = "SQ_INSIGH", sequenceName = "SQ_INSIGH", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_OG_INSIGHT")
+    @SequenceGenerator(name = "SQ_OG_INSIGHT", sequenceName = "SQ_OG_INSIGHT", allocationSize = 1)
     @Column(name = "ID_INSIGH")
     private Long id;
 

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Builder
 public record InsightResponse(
-        String  dadosCliente,
+        String  cliente,
         LocalDate dataGeracao,
         String detalhes,
         String recomendacoes,

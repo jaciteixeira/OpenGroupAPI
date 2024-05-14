@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 })
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_CLIENTE")
-    @SequenceGenerator(name = "SQ_CLIENTE", sequenceName = "SQ_CLIENTE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SQ_OG_CLIENTE")
+    @SequenceGenerator(name = "SQ_OG_CLIENTE", sequenceName = "SQ_OG_CLIENTE", allocationSize = 1)
     @Column(name = "ID_CLIENTE")
     private Long id;
 
@@ -59,4 +59,12 @@ public class Cliente {
 
     @Column(name = "OBJETIVOS")
     private String objetivos;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(
+            name = "ARQUIVO",
+            referencedColumnName = "ID_ARQUIVO",
+            foreignKey = @ForeignKey(name = "FK_ARQUIVO_CLIENTE")
+    )
+    private Arquivo arquivo;
 }
