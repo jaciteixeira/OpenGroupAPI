@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8408ebc2-0d9f-4c20-b200-4273e4867a5f",
+		"_postman_id": "c177cf52-a3c6-45aa-89cb-879d0caac88a",
 		"name": "OpenGroup",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "30321921"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n\"nome\": \"Tech Solutions\",\r\n\"segmento\": \"Tecnologia\",\r\n\"localizacao\": \"São Paulo\",\r\n\"tempoAtuacao\": 5,\r\n\"numFuncionarios\": 100,\r\n\"faturamentoAnual\": 5000000.0,\r\n\"canaisVenda\": \"Online, Físico\",\r\n\"produtosServicos\": \"Software, Consultoria\",\r\n\"tipo\": \"PME\",\r\n\"porte\": \"Médio\",\r\n\"concorrentes\": \"Empresa A, Empresa B\",\r\n\"desafios\": \"Expandir mercado internacional\",\r\n\"objetivos\": \"Aumentar market share\"\r\n}",
+							"raw": "\r\n{\r\n\"nome\": \"Tech Solutions\",\r\n\"segmento\": \"Tecnologia\",\r\n\"numFuncionarios\": 100,\r\n\"produtosServicos\": \"Software, Consultoria\",\r\n\"tipo\": \"EPP\",\r\n\"desafios\": \"Expandir mercado internacional\",\r\n\"objetivos\": \"Aumentar market share\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -30,6 +30,42 @@
 							],
 							"path": [
 								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload arquivo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "arquivo",
+									"type": "file",
+									"src": "postman-cloud:///1ef12d9d-c507-4bc0-b88a-03a3c224811c"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost/cliente/1/arquivo/upload?palavra=tech_solutions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"cliente",
+								"1",
+								"arquivo",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "palavra",
+									"value": "tech_solutions"
+								}
 							]
 						}
 					},
@@ -58,13 +94,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost/cliente/2",
+							"raw": "localhost/cliente/1",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"cliente",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -76,7 +112,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost/cliente?tipo=pme&nome=Tech Solutions",
+							"raw": "localhost/cliente?segmento=tecnologia&tipo=EPP&nome=Tech Solutions",
 							"host": [
 								"localhost"
 							],
@@ -86,12 +122,11 @@
 							"query": [
 								{
 									"key": "segmento",
-									"value": "varejo",
-									"disabled": true
+									"value": "tecnologia"
 								},
 								{
 									"key": "tipo",
-									"value": "pme"
+									"value": "EPP"
 								},
 								{
 									"key": "nome",
@@ -101,96 +136,21 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "arquivo",
-			"item": [
-				{
-					"name": "arquivo",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"relatorio_trimestral.pdf\",\r\n  \"tipo\": \"PDF\",\r\n  \"tamanho\": 1024,\r\n  \"palavrasChave\": \"relatório\",\r\n  \"link\": \"http://www.example.com/relatorio_trimestral.pdf\",\r\n  \"resumo\": \"Este é um resumo do relatório trimestral\",\r\n  \"clienteId\":2\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost/arquivo",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"arquivo"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "arquivo",
+					"name": "cliente arquivos",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost/arquivo",
+							"raw": "localhost/cliente/1/arquivo",
 							"host": [
 								"localhost"
 							],
 							"path": [
+								"cliente",
+								"1",
 								"arquivo"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "arquivo param",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost/arquivo?nome=Relatorio_compras",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"arquivo"
-							],
-							"query": [
-								{
-									"key": "cliente",
-									"value": "joão",
-									"disabled": true
-								},
-								{
-									"key": "nome",
-									"value": "Relatorio_compras"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "arquivo id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost/arquivo/5",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"arquivo",
-								"5"
 							]
 						}
 					},
@@ -232,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"nome\": \"Ana Pitanga\",\r\n  \"email\": \"ana@gmail.com\",\r\n  \"dataCriacao\": \"2024-04-16\",\r\n  \"identificacao\": \"pitanga_\",\r\n  \"telefone\": \"(21) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"clienteId\":2\r\n}\r\n",
+							"raw": "{\r\n  \"email\": \"contato@techsolutions.com\",\r\n  \"identificacao\": \"tech_solutions \",\r\n  \"telefone\": \"(11) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"clienteId\":1\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -328,7 +288,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost/usuario?identificacao=pitanga_",
+							"raw": "localhost/usuario?identificacao=tech_solutions",
 							"host": [
 								"localhost"
 							],
@@ -337,13 +297,8 @@
 							],
 							"query": [
 								{
-									"key": "nome",
-									"value": "ana",
-									"disabled": true
-								},
-								{
 									"key": "identificacao",
-									"value": "pitanga_"
+									"value": "tech_solutions"
 								}
 							]
 						}
