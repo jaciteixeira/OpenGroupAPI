@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ArquivoRepository extends JpaRepository<Arquivo, Long> {
-//    List<Arquivo> findAllByClienteId(Long dadcliente;
+//    Arquivo findByClienteId(Long clienteId);
+    List<Arquivo> findAllByClienteId(Long clienteId);
 }

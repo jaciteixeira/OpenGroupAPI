@@ -59,12 +59,12 @@ public class Cliente {
 
     @Column(name = "OBJETIVOS")
     private String objetivos;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(
-            name = "ARQUIVO",
-            referencedColumnName = "ID_ARQUIVO",
-            foreignKey = @ForeignKey(name = "FK_ARQUIVO_CLIENTE")
-    )
-    private Arquivo arquivo;
+//
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinColumn(
+//            name = "ID_ARQUIVO",
+//            referencedColumnName = "ID_ARQUIVO",
+//            foreignKey = @ForeignKey(name = "FK_ARQUIVO_CLIENTE")
+//    )
+//    private Arquivo arquivo;
 }

@@ -4,7 +4,6 @@ import br.com.fiap.opengroup.dto.ServiceDTO;
 import br.com.fiap.opengroup.dto.request.ClienteRequest;
 import br.com.fiap.opengroup.dto.response.ClienteResponse;
 import br.com.fiap.opengroup.entity.Cliente;
-import br.com.fiap.opengroup.entity.TipoEmpresa;
 import br.com.fiap.opengroup.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -32,7 +31,7 @@ public class ClienteService implements ServiceDTO<Cliente, ClienteRequest, Clien
                 .faturamentoAnual(r.faturamentoAnual())
                 .canaisVenda(r.canaisVenda())
                 .produtosServicos(gerarProdutoServico())
-                .tipo(TipoEmpresa.valueOf(r.tipo()))
+                .tipo(r.tipo())
                 .porte(r.porte())
                 .concorrentes(gerarConcorrente())
                 .desafios(r.desafios())
@@ -76,6 +75,7 @@ public class ClienteService implements ServiceDTO<Cliente, ClienteRequest, Clien
 
     @Override
     public Cliente save(ClienteRequest r) {
+        System.out.println(r);
         return repo.save(toEntity(r));
     }
 
@@ -85,7 +85,7 @@ public class ClienteService implements ServiceDTO<Cliente, ClienteRequest, Clien
     }
 
     public String gerarConcorrente() {
-        String[] concorrentes = {"CodeWise Solutions", "InnovateTech Solutions", "DataSphere Solutions"};
+        String[] concorrentes = {"CodeWise Solutions", "InnovaTech Solutions", "DataSphere Solutions"};
         return concorrentes[new Random().nextInt(concorrentes.length)];
     }
 

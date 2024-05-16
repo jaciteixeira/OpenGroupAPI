@@ -25,9 +25,6 @@ public class Usuario {
     @Column(name = "ID_USUARIO")
     private Long id;
 
-    @Column(name = "NM_USUARIO")
-    private String nome;
-
     @Column(name = "EMAIL_USUARIO")
     private String email;
 
@@ -48,10 +45,10 @@ public class Usuario {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(
-            name = "CLIENTE",
+            name = "ID_CLIENTE",
             referencedColumnName = "ID_CLIENTE" ,
             foreignKey = @ForeignKey(
-                    name = "FK_USUARIO_CLIENTE"
+                    name = "FK_USUARIO_CLIENT"
             )
     )
     private Cliente cliente;

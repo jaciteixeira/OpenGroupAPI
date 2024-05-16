@@ -2,6 +2,7 @@ package br.com.fiap.opengroup.controller;
 
 import br.com.fiap.opengroup.dto.ControllerDTO;
 import br.com.fiap.opengroup.dto.request.ClienteRequest;
+import br.com.fiap.opengroup.dto.response.ArquivoResponse;
 import br.com.fiap.opengroup.dto.response.ClienteResponse;
 import br.com.fiap.opengroup.entity.Arquivo;
 import br.com.fiap.opengroup.entity.Cliente;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -53,6 +55,8 @@ public class ClienteController implements ControllerDTO<ClienteRequest, ClienteR
                 .build();
 
         ExampleMatcher matcher = ExampleMatcher.matchingAll()
+                .withMatcher("segmento", match -> match.contains())
+                .withMatcher("nome", match -> match.contains())
                 .withIgnoreNullValues()
                 .withIgnoreCase();
 
@@ -87,10 +91,9 @@ public class ClienteController implements ControllerDTO<ClienteRequest, ClienteR
     }
 
     @Transactional
-    @PostMapping(value = "/{id}/arquivo")
-    public ResponseEntity<?> upload(@RequestPart("arquivo")MultipartFile file, @PathVariable("id") Long id, @RequestBody String palavra){
+    @PostMapping(value = "/{id}/arquivo/upload")
+    public ResponseEntity<?> upload(@RequestPart("arquivo")MultipartFile file, @RequestParam("palavra") String palavra, @PathVariable("id") Long id){
         var entity = service.findById( id );
-
         if (Objects.isNull( entity )) return ResponseEntity.notFound().build();
 
         String extension = StringUtils.getFilenameExtension( file.getOriginalFilename() );
@@ -101,23 +104,32 @@ public class ClienteController implements ControllerDTO<ClienteRequest, ClienteR
         if ((file.getContentType() != null && (extension != null && textExtensions.contains(extension.toLowerCase())))) {
             Arquivo arquivo = Arquivo.builder()
                     .nome(file.getOriginalFilename())
-                    .caminho(entity.getClass().getSimpleName().toLowerCase().replace( " ", "__" ) + "_" + entity.getId() + "_" + UUID.randomUUID().toString() + "." + extension )
+                    .src(file.getOriginalFilename().toLowerCase().replace( " ", "__" ) + "_" + entity.getId() + "_" + UUID.randomUUID() + "." + extension )
                     .extensao(extension)
-                    .dataUpload(LocalDate.now())
+                    .dataUpload(LocalDateTime.now())
                     .palavrasChave(palavra)
                     .tamanho(file.getSize())
+                    .cliente(service.findById(id))
                     .build();
-            if (!arquivoService.uploadFile(file, arquivo)) return ResponseEntity.badRequest().build();
+            var saved = arquivoService.save( arquivo, file);
+            if (Objects.isNull(saved)) return ResponseEntity.badRequest().build();
 
-            entity.setArquivo( arquivo );
-            var response = service.toResponse(entity);
+            var response = arquivoService.toResponse(saved);
             var uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
                     .path( "/{id}" )
-                    .buildAndExpand( entity.getId() ).toUri();
+                    .buildAndExpand( saved.getId() ).toUri();
 
             return ResponseEntity.created( uri ).body( response ); //201
         } else {
             return ResponseEntity.badRequest().body("Apenas arquivos de texto são permitidos.");
         }
+    }
+
+    @GetMapping(value = "/{id}/arquivo")
+    public ResponseEntity<Collection<ArquivoResponse>> findAllArquivos( @PathVariable("id") Long id){
+        var arquivo = arquivoService.findAllByCliente(id);
+        if (Objects.isNull(arquivo)) return ResponseEntity.badRequest().build();
+        var response = arquivo.stream().map( arquivoService::toResponse ).toList();
+        return ResponseEntity.ok(response);
     }
 }

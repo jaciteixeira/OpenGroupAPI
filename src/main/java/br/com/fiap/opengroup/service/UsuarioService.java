@@ -27,7 +27,6 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
         var cliente = clienteService.findById(r.clienteId());
         if (Objects.isNull(cliente)) return null;
         return Usuario.builder()
-                .nome(r.nome())
                 .dataCriacao(LocalDate.now())
                 .identificacao(r.identificacao())
                 .telefone(r.telefone())
@@ -41,7 +40,7 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
     public UsuarioResponse toResponse(Usuario e) {
         if (Objects.isNull(e)) return null;
         return UsuarioResponse.builder()
-                .nome(e.getNome())
+//                .nome(e.getNome())
                 .identificacao(e.getIdentificacao())
                 .status(e.getStatus())
                 .build();

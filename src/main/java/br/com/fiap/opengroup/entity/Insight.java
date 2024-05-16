@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class Insight {
     private Long id;
 
     @Column(name = "DATA_GERACAO")
-    private LocalDate dataGeracao;
+    private LocalDateTime dataGeracao;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "IMPACTO")
@@ -39,7 +39,7 @@ public class Insight {
             name = "ID_CLIENTE",
             referencedColumnName = "ID_CLIENTE",
             foreignKey = @ForeignKey(
-                    name = "FK_INSIGH_CLIENTE"
+                    name = "FK_INSIGHT_CLIENTE"
             )
     )
     private Cliente cliente;

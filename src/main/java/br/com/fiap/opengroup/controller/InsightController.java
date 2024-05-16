@@ -1,6 +1,7 @@
 package br.com.fiap.opengroup.controller;
 
 import br.com.fiap.opengroup.dto.response.InsightResponse;
+import br.com.fiap.opengroup.exception.ResourceNotFoundException;
 import br.com.fiap.opengroup.service.ClienteService;
 import br.com.fiap.opengroup.service.InsightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class InsightController {
 
     @GetMapping("/recomendacoes/{id}")
     public ResponseEntity<InsightResponse> obterRecomendacoes(@PathVariable Long id) {
-        if (Objects.isNull(clienteService.findById(id))) return ResponseEntity.badRequest().build();
+        if (Objects.isNull(clienteService.findById(id))) throw new ResourceNotFoundException("Cliente não encontrado para o id passado !!") ;
         return ResponseEntity.ok(service.gerarInsightPorIA(id));
     }
 }

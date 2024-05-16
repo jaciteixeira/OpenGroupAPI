@@ -26,18 +26,16 @@ public class UsuarioController implements ControllerDTO<UsuarioRequest, UsuarioR
 
     @GetMapping
     public ResponseEntity<Collection<UsuarioResponse>> findAll(
-            @RequestParam(name = "nome", required = false) String nome,
             @RequestParam(name = "identificacao", required = false) String identificacao
     ) {
         var item = Usuario.builder()
-                .nome(nome)
                 .identificacao(identificacao)
                 .build();
 
         ExampleMatcher matcher = ExampleMatcher.matchingAll()
                 .withIgnoreNullValues()
                 .withIgnoreCase()
-                .withMatcher("src", ExampleMatcher.GenericPropertyMatchers.contains());
+                .withMatcher("identificacao", match -> match.contains());
 
         Example<Usuario> example = Example.of(item, matcher);
 

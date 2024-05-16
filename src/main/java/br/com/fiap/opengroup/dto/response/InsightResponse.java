@@ -2,15 +2,13 @@ package br.com.fiap.opengroup.dto.response;
 
 import br.com.fiap.opengroup.entity.Impacto;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 public record InsightResponse(
         String  cliente,
-        LocalDate dataGeracao,
+        LocalDateTime dataGeracao,
         String detalhes,
         String recomendacoes,
         Impacto impacto
