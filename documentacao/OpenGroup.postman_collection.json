@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\r\n{\r\n\"nome\": \"Tech Solutions\",\r\n\"segmento\": \"Tecnologia\",\r\n\"numFuncionarios\": 100,\r\n\"produtosServicos\": \"Software, Consultoria\",\r\n\"tipo\": \"EPP\",\r\n\"desafios\": \"Expandir mercado internacional\",\r\n\"objetivos\": \"Aumentar market share\"\r\n}",
+							"raw": "\r\n{\r\n\"nome\": \"Tech Solutions\",\r\n\"segmento\": \"Tecnologia\",\r\n\"tipo\": \"EPP\",\r\n\"desafios\": \"Expandir mercado internacional\",\r\n\"objetivos\": \"Aumentar market share\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"contato@techsolutions.com\",\r\n  \"identificacao\": \"tech_solutions \",\r\n  \"telefone\": \"(11) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"clienteId\":1\r\n}\r\n",
+							"raw": "{\r\n  \"email\": \"contato@techsolutions.com\",\r\n  \"identificacao\": \"techsolutions \",\r\n  \"telefone\": \"(11) 99341-5788\",\r\n  \"senha\": \"Senha@456\",\r\n  \"status\": \"ativo\",\r\n  \"clienteId\":1\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -300,6 +300,33 @@
 									"key": "identificacao",
 									"value": "tech_solutions"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuario login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"contato@techsolutions.com\",\r\n  \"senha\": \"Senha@456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/usuario/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"usuario",
+								"login"
 							]
 						}
 					},

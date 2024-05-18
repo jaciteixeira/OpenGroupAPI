@@ -27,6 +27,7 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
         var cliente = clienteService.findById(r.clienteId());
         if (Objects.isNull(cliente)) return null;
         return Usuario.builder()
+                .email(r.email())
                 .dataCriacao(LocalDate.now())
                 .identificacao(r.identificacao())
                 .telefone(r.telefone())
@@ -64,5 +65,10 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
     @Override
     public Usuario save(UsuarioRequest r) {
         return repo.save(toEntity(r));
+    }
+
+    public Usuario findByEmail(String email) {
+        var usuario = repo.findByEmail(email);
+        return usuario;
     }
 }
