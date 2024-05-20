@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record UsuarioRequest(
-//        @NotBlank(message = "O src é obrigatório!")
-//        String nome,
         @NotBlank(message = "O email é obrigatório!")
         @Email(message = "Email inválido!")
         String email,
@@ -18,7 +16,6 @@ public record UsuarioRequest(
         @NotBlank
         @NotNull(message = "a senha é obrigatório!")
         String senha,
-        @NotBlank
         String status,
         @NotNull(message = "O id cliente que o usuario se reporta é obrigatório!")
         Long clienteId

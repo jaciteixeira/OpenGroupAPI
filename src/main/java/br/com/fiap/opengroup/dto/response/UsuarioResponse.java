@@ -4,8 +4,10 @@ import lombok.Builder;
 
 @Builder
 public record UsuarioResponse(
-//        String nome,
         String identificacao,
-        String status
+        String status,
+        String email,
+        Long clienteId
+
 ) {
 }

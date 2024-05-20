@@ -41,7 +41,8 @@ public class UsuarioService implements ServiceDTO<Usuario, UsuarioRequest, Usuar
     public UsuarioResponse toResponse(Usuario e) {
         if (Objects.isNull(e)) return null;
         return UsuarioResponse.builder()
-//                .nome(e.getNome())
+                .clienteId(e.getCliente().getId())
+                .email(e.getEmail())
                 .identificacao(e.getIdentificacao())
                 .status(e.getStatus())
                 .build();
